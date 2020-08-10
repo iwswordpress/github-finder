@@ -13,7 +13,7 @@ class App extends Component {
     this.setState({ loading: true });
     console.log('get data via async/await...');
     const res = await axios.get('https://api.github.com/users');
-    this.setState({ users: res.data, loading: true });
+    this.setState({ users: res.data, loading: false });
     console.log(res.data);
   }
   render() {
