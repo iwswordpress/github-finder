@@ -10,9 +10,14 @@ class App extends Component {
     loading: false
   };
   async componentDidMount() {
+    console.log('Client_ID: ', process.env.REACT_APP_GITHUB_CLIENT_ID);
+    console.log('Client_SECRET: ', process.env.REACT_APP_GITHUB_CLIENT_SECRET);
+
     this.setState({ loading: true });
     console.log('get data via async/await...');
-    const res = await axios.get('https://api.github.com/users');
+    const res = await axios.get(
+      `https://api.github.com/users?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+    );
     this.setState({ users: res.data, loading: false });
     console.log(res.data);
   }
