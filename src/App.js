@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Navbar from './components/layout/Navbar';
 import axios from 'axios';
-
+import PropTypes from 'prop-types';
 import Users from './components/users/Users';
 import Search from './components/users/Search';
 class App extends Component {
@@ -10,6 +10,7 @@ class App extends Component {
     users: [],
     loading: false
   };
+
   // async componentDidMount() {
   //   console.log('Client_ID: ', process.env.REACT_APP_GITHUB_CLIENT_ID);
   //   console.log('Client_SECRET: ', process.env.REACT_APP_GITHUB_CLIENT_SECRET);
