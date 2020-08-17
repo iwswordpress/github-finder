@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import './App.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import axios from 'axios';
 import Alert from './components/layout/Alert';
 import Users from './components/users/Users';
 import Search from './components/users/Search';
+import About from './components/pages/About';
 class App extends Component {
   state = {
     users: [],
@@ -48,20 +50,33 @@ class App extends Component {
   render() {
     const { users, loading } = this.state;
     return (
-      <div className='App'>
-        <Navbar title='Github Finder' icon='fa fa-github' />
-        <div className='container'>
-          <Alert alert={this.state.alert} closeAlert={this.closeAlert} />
-          <Search
-            searchUsers={this.searchUsers}
-            clearUsers={this.clearUsers}
-            showClear={users.length > 0 ? true : false}
-            setAlert={this.setAlert}
-            closeAlert={this.closeAlert}
-          />
-          <Users loading={loading} users={users} />
+      <Router>
+        <div className='App'>
+          <Navbar title='Github Finder' icon='fa fa-github' />
+          <div className='container'>
+            <Alert alert={this.state.alert} closeAlert={this.closeAlert} />
+            <Switch>
+              <Route
+                exact
+                path='/'
+                render={(props) => (
+                  <Fragment>
+                    <Search
+                      searchUsers={this.searchUsers}
+                      clearUsers={this.clearUsers}
+                      showClear={users.length > 0 ? true : false}
+                      setAlert={this.setAlert}
+                      closeAlert={this.closeAlert}
+                    />
+                    <Users loading={loading} users={users} />
+                  </Fragment>
+                )}
+              />
+              <Route exact path='/about' component={About} />
+            </Switch>
+          </div>
         </div>
-      </div>
+      </Router>
     );
   }
 }
