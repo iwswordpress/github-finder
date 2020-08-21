@@ -1,11 +1,18 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import Spinner from '../layout/Spinner';
+import PropTypes from 'prop-types';
 class User extends Component {
   componentDidMount() {
     console.log(this.props.match.params);
     this.props.getUser(this.props.match.params.login);
     console.log(this.props.getUser(this.props.match.params.login));
   }
+  static propTypes = {
+    loading: PropTypes.bool,
+    user: PropTypes.object.isRequired,
+    getUser: PropTypes.func.isRequired
+  };
   render() {
     // const {} = this.props.user;
     const {
